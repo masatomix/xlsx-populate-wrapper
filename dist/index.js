@@ -42,6 +42,9 @@ var Workbook = /** @class */ (function () {
         this.workbook = null;
         this.filePath = filePath;
     }
+    Workbook.prototype.getWorkbook = function () {
+        return this.workbook;
+    };
     Workbook.prototype.init = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _a, error_1;
@@ -85,14 +88,14 @@ var Workbook = /** @class */ (function () {
             }, {});
         });
     };
-    Workbook.prototype.commit = function () {
+    Workbook.prototype.commit = function (path) {
         return __awaiter(this, void 0, void 0, function () {
             var error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.workbook.toFileAsync(this.filePath)];
+                        return [4 /*yield*/, this.workbook.toFileAsync(path)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/, this];
