@@ -1,5 +1,6 @@
 interface IWorkbook {
-    commit: () => Promise<this>;
+    commit: (path: string) => Promise<this>;
+    getWorkbook: () => any;
     getData: (wsName: string) => any[];
     getHeadings: (wsName: string) => any[];
     getSheetNames: () => string[];
@@ -10,6 +11,7 @@ declare class Workbook implements IWorkbook {
     private filePath;
     private workbook;
     constructor(filePath?: string);
+    getWorkbook(): any;
     init(): Promise<this>;
     getSheetNames(): string[];
     /**
@@ -19,7 +21,7 @@ declare class Workbook implements IWorkbook {
      * @return array of objects representing a record
      */
     getData(wsName: string): any[];
-    commit(): Promise<this>;
+    commit(path: string): Promise<this>;
     update(wsName: string, jsonData: any[]): void;
     getHeadings(wsName: string): any[];
     private getAoaData;

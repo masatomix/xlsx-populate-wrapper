@@ -1,7 +1,8 @@
 import * as XPop from 'xlsx-populate'
 
 interface IWorkbook {
-  commit: () => Promise<this>
+  commit: (path: string) => Promise<this>
+  getWorkbook: () => any
   getData: (wsName: string) => any[]
   getHeadings: (wsName: string) => any[]
   getSheetNames: () => string[]
@@ -14,6 +15,10 @@ class Workbook implements IWorkbook {
   private workbook: any = null
   constructor(filePath: string = '') {
     this.filePath = filePath
+  }
+
+  public getWorkbook(): any {
+    return this.workbook
   }
 
   public async init(): Promise<this> {
@@ -57,9 +62,9 @@ class Workbook implements IWorkbook {
     )
   }
 
-  public async commit(): Promise<this> {
+  public async commit(path: string): Promise<this> {
     try {
-      await this.workbook.toFileAsync(this.filePath)
+      await this.workbook.toFileAsync(path)
       return this
     } catch (error) {
       throw error
